@@ -86,3 +86,26 @@ class Auto:
             self.motor1._girar(self.motor1.grados, self.motor1.grados)
             self.motor2._girar(self.motor1.grados, self.motor1.grados)
             self.estado=3
+
+SOUND_SPEED=340
+TRIG_PULSE_DURATION_US=10
+class HCSR04:
+
+        
+    def __init__(self):
+        self.trig_pin = Pin(18, Pin.OUT) 
+        self.echo_pin = Pin(19, Pin.IN)
+
+    def medir(self):
+        # Prepare le signal
+        self.trig_pin.value(0)
+        sleep_us(5)
+        # Créer une impulsion de 10 µs
+        self.trig_pin.value(1)
+        sleep_us(TRIG_PULSE_DURATION_US)
+        self.trig_pin.value(0)
+
+        ultrason_duration = time_pulse_us(self.echo_pin, 1, 30000) # Renvoie le temps de propagation de l'onde (en µs)
+        distance_cm = SOUND_SPEED * ultrason_duration / 20000
+        return distance_cm
+
