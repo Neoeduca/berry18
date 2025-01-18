@@ -11,8 +11,8 @@ class servo360:
         duty = int((12.346*grados**2 + 7777.8*grados + 700000))
         self.servo.duty_ns(duty)
 
-    def movedetener(self):
-        self._servo_1.duty_ns(0)
+    def detener(self):
+        self.servo.duty_ns(0)
         
 class carro:
     def __init__(self, motor_pin1, motor_pin2):
