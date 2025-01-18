@@ -10,6 +10,9 @@ class servo360:
     def girar(self, grados):
         duty = int((12.346*grados**2 + 7777.8*grados + 700000))
         self.servo.duty_ns(duty)
+
+    def movedetener(self):
+        self._servo_1.duty_ns(0)
         
 class carro:
     def __init__(self, motor_pin1, motor_pin2):
@@ -31,11 +34,11 @@ class carro:
         time.sleep_ms(5000)
         print("frenando....")
         self.movedetener()
-        print("Si no frena, requiere calibración para detener")
+        print("Si no frena, llame a su profesor")
         time.sleep_ms(1000)  
         
         
-    def setvelocidad1(self, grados_1, grados_2):
+    def setvelocidad(self, grados_1, grados_2):
         self._grados_1=grados_1
         self._grados_2=grados_2
     
@@ -44,12 +47,12 @@ class carro:
         self._grados_fast2=grados_2
         
         
-    def moveadelanteSpeed1(self):
+    def moveadelante(self):
         if self._estado!=1:
             self._girar(self._grados_1,self._grados_2)
             self._estado=1
 
-    def moveadelanteSpeed2(self):
+    def moveadelante2(self):
         if self._estado!=5:
             self._girar(self._grados_fast1,self._grados_fast2)
             self._estado=5
