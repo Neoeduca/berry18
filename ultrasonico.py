@@ -1,3 +1,6 @@
+from machine import Pin, time_pulse_us
+from time import sleep_us
+
 class Ultrasonico:   
     def __init__(self):
         self.trig_pin = Pin(18, Pin.OUT) 
