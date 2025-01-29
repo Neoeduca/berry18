@@ -6,7 +6,7 @@ class Buzzer:
         self.pin = Pin(pin)
         self.buzzer = PWM(self.pin)
     
-    def on(self, frecuencia: int) -> None:
+    def on(self, frecuencia: int=440) -> None:
         self.buzzer.freq(frecuencia)
         self.buzzer.duty_u16(2**15)
         
