@@ -1,0 +1,18 @@
+module rctime
+author unknown
+version 1 0 
+description ''
+variables micros 
+
+  spec 'r' 'RCtime' 'RCtime _' 'auto' 10
+
+to RCtime pin {
+  comment 'Lee el tiempo de descarga de un circuito RC a través del pin'
+  digitalWriteOp pin true
+  waitMillis 1
+  digitalWriteOp pin false
+  micros = (microsOp)
+  repeatUntil (not (digitalReadOp pin)) nil
+  return (microsSince micros 'now')
+}
+
