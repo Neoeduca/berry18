@@ -1,4 +1,5 @@
 import utime as time
+from time import sleep
 from machine import Pin, PWM
 
 class servo360:
@@ -13,7 +14,29 @@ class servo360:
 
     def detener(self):
         self.servo.duty_ns(0)
+    
+    def barrer(self):
+        for i in range(0, 180, 5):
+            print(i)
+            self.girar(i)
+            sleep(0.2)
+
+class SG90:
+    def __init__(self, pin):
+        self.pin = Pin(pin, Pin.OUT)
+        self._angulo = -1  
+        self.pwm = PWM(self.pin)
+        self.pwm.freq(50)
         
+    def angulo(self, angulo=None):
+        if angulo is None:
+            return self._angulo 
+        self._angulo = angulo
+        ton = (int(angulo)+45)*100_000/9
+        self.pwm.duty_ns(int(ton))
+        sleep(0.5)
+        self.pwm.deinit()
+
 class carro:
     def __init__(self, motor_pin1, motor_pin2):
         
