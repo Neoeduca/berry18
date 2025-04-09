@@ -23,6 +23,28 @@ class Ldr:
     def medir(self):
         return self.RCtime()
 
+class Qti:
+    def __init__(self, pin):
+        self.pin = pin
+        
+    
+    def RCtime(self):    
+        sensor = Pin(self.pin, Pin.OUT)
+        sensor.on() 
+        sleep_ms(1)
+        
+        sensor = Pin(self.pin, Pin.IN) 
+        sensor.off()
+        start_time = ticks_us()
+        while sensor.value():
+            pass
+        end_time = ticks_us()
+
+        return ticks_diff(end_time, start_time)
+    
+
+    def medir(self):
+        return self.RCtime()
 
 class Ultrasonico:   
     def __init__(self):
