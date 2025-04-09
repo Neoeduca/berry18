@@ -20,6 +20,7 @@ class servo360:
             print(i)
             self.girar(i)
             sleep(0.2)
+        self.detener()
 
 class SG90:
     def __init__(self, pin):
