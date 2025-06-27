@@ -93,9 +93,9 @@ class Buzzer:
 def test(i):
     if 0<=i<=1:
         boton = Pin(i, Pin.IN, Pin.PULL_UP)
-        print("Se testeará por 5 segundos")
+        print("Se testeará por 2.5 segundos")
         start_time = ticks_us()
-        while ticks_diff(ticks_us(), start_time)<5_000_000:
+        while ticks_diff(ticks_us(), start_time)<2_500_000:
             print(boton.value())
             sleep(0.1)
         
@@ -103,17 +103,25 @@ def test(i):
         led = Pin(i, Pin.OUT)
         for i in range(3):
             led.on()
-            sleep(0.4)
+            sleep(0.3)
             led.off()
-            sleep(0.4)
+            sleep(0.2)
     elif i == 5:
         #cambiar luego por una cancioncita corta
         buzzer = Buzzer(i)
-        for i in range(5):
-            buzzer.on()
-            sleep(0.4)
-            buzzer.off()
-            sleep(0.4)
+        # Duraciones
+        duracion_nota = 0.3
+        silencio = 0.1
+
+        # Notas de la escala de Do mayor
+        buzzer.tone(262, duracion_nota, silencio)  # Do
+        buzzer.tone(294, duracion_nota, silencio)  # Re
+        buzzer.tone(330, duracion_nota, silencio)  # Mi
+        buzzer.tone(349, duracion_nota, silencio)  # Fa
+        buzzer.tone(392, duracion_nota, silencio)  # Sol
+        buzzer.tone(440, duracion_nota, silencio)  # La
+        buzzer.tone(494, duracion_nota, silencio)  # Si
+        buzzer.tone(523, duracion_nota)            # Do (octava arriba, sin silencio)
     elif 6<= i <= 12:
         qti = Qti(i)
         print("Se testeará por 5 segundos")
